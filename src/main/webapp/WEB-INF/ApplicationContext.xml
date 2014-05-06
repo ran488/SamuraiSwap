@@ -10,7 +10,7 @@
 
 	<context:property-placeholder location="classpath:samuraiswap.properties" />
 
-	<bean name="mongoClient" class="com.mongodb.MongoClient" scope="singleton">
+	<bean name="mongoClient" class="com.mongodb.MongoClient" scope="singleton" destroy-method="close">
 		<constructor-arg value="${mongodb.host}" />
 		<constructor-arg value="${mongodb.port}" />
 	</bean>

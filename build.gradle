@@ -34,5 +34,5 @@ dependencies {
 }
 
 task localdeploy(dependsOn: build) << {
-	ant.copy(file:'build/libs/SamuraiSwap.war', todir:'C:/tools/wildfly-8.0.0.Alpha4/standalone/deployments')
+	ant.copy(file:'build/libs/SamuraiSwap.war', todir:'C:/tools/apache-tomcat-7.0.53/webapps')
 }

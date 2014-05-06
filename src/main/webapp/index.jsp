@@ -10,5 +10,7 @@
 <body>
 	<h1>That's right...It's Samurai Swap!</h1>
 	<a href="test.jsp">Test MongoDB connectivity</a>
+	<a href="api/hello">Rest Greeting (default)</a>
+	<a href="api/hello?name=ran488">Rest Greeting (my name)</a>
 </body>
 </html>
