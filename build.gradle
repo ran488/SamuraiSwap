@@ -1,10 +1,25 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 
-repositories { 
-	mavenCentral() 
+repositories {
+	mavenCentral()
+
+}
+
+findbugsMain { ignoreFailures = false }
+findbugsTest { ignoreFailures = true }
+pmdMain { ignoreFailures = true }
+pmdTest { ignoreFailures = true }
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
 }
 
 dependencies {
@@ -13,7 +28,7 @@ dependencies {
 	compile 'commons-logging:commons-logging:1.1.1'
 	compile 'org.aspectj:aspectjrt:1.6.2'
 	compile 'org.aspectj:aspectjweaver:1.6.1'
-	
+
 	compile 'org.springframework:spring-core:4.0.4.RELEASE'
 	compile 'org.springframework:spring-aop:4.0.4.RELEASE'
 	compile 'org.springframework:spring-aspects:4.0.4.RELEASE'
@@ -27,12 +42,11 @@ dependencies {
 	compile 'org.springframework.ws:spring-ws-core:2.1.4.RELEASE'
 	compile 'org.springframework.integration:spring-integration-core:4.0.0.RELEASE'
 	compile 'org.springframework.integration:spring-integration-sftp:4.0.0.RELEASE'
+	
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
 
+	//	testCompile 'org.easyb:easyb:0.9.6'
+	//	testCompile 'org.easyb:easyb-junit:0.5.3'
 	testCompile 'junit:junit:4.+'
 	testCompile 'org.easymock:easymock:3.1'
-	testCompile 'org.easyb:easyb:0.9.6'	
-}
-
-task localdeploy(dependsOn: build) << {
-	ant.copy(file:'build/libs/SamuraiSwap.war', todir:'C:/tools/apache-tomcat-7.0.53/webapps')
 }
