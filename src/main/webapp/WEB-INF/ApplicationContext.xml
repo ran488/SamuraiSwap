@@ -8,15 +8,32 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:samuraiswap.properties" />
+	<context:property-placeholder location="classpath:samuraiswap.properties"
+		ignore-unresolvable="true" system-properties-mode="ENVIRONMENT" />
 
-	<bean name="mongoClient" class="com.mongodb.MongoClient" scope="singleton" destroy-method="close">
-		<constructor-arg value="${mongodb.host}" />
-		<constructor-arg value="${mongodb.port}" />
-	</bean>
-	
-	<bean name="db" class="com.mongodb.DB" factory-bean="mongoClient" factory-method="getDB">
-		<constructor-arg value="${mongodb.db}"/>
+	<bean id="dbx" class="com.samuraiswap.TempDebugCrap">
+		<property name="props" ref="systemProperties" />
 	</bean>
 
+	<bean name="mongoClient" class="com.mongodb.MongoClient" scope="singleton"
+		destroy-method="close">
+		<constructor-arg value="${OPENSHIFT_MONGODB_DB_HOST}" />
+		<constructor-arg value="${OPENSHIFT_MONGODB_DB_PORT}" />
+	</bean>
+
+	<bean name="db" class="com.mongodb.DB" factory-bean="mongoClient"
+		factory-method="getDB">
+		<constructor-arg value="${OPENSHIFT_APP_NAME}" />
+	</bean>
+
+
+	<util:properties id="dbCredentials">
+		<prop key="username">${OPENSHIFT_MONGODB_DB_USERNAME}</prop>
+		<prop key="password">${OPENSHIFT_MONGODB_DB_PASSWORD}</prop>
+	</util:properties>
+
+	<bean name="swapItemDao" class="com.samuraiswap.dao.SwapItemDao">
+		<constructor-arg ref="db" />
+		<constructor-arg ref="dbCredentials" />
+	</bean>
 </beans>

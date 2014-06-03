@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="swapApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>List of Items to Swap</title>
+<link rel="stylesheet" type="text/css" href="application.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
+<script src="js/controllers.js"></script>
+</head>
+<body ng-controller="swapAppController">
+
+<p>Search: <input ng-model="query"/>
+<p>Current Query: {{query}}
+
+	<ul>
+		<li ng-repeat="swapItem in swapItems | filter:query">
+		     Summary: {{swapItem.summary}}
+		<br/>Description: {{swapItem.description}}
+		<br/>Location: {{swapItem.location}}
+		<br/>Owner: {{swapItem.owner}}
+		</li>
+	</ul>
+	
+	{{swapItems.length}} items available. 
+	Raw Model: 
+<pre>
+{{swapItems}}
+</pre>
+</body>
+</html>
