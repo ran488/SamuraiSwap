@@ -9,7 +9,9 @@
 </head>
 <body>
 	<table width="65%" bgcolor="white" border="0" align="center">
-	<tr><th>That's right...It's Samurai Swap!</th></tr>
+		<tr>
+			<td><img alt="Logo" src="logo.png" border="0" /></td>
+		</tr>
 		<tr>
 			<td>
 				<ul>
@@ -17,14 +19,16 @@
 					<li><a href="api/hello">Rest Greeting (default)</a></li>
 					<li><a href="api/hello?name=ran488">Rest Greeting (my
 							name)</a></li>
-					<li>Try to add a new Swap Item <form action="api/createSwapItem" method="POST">
-					<input type="submit" value="Create New Swap Item" />
-				</form>
-					</li>					
+					<li><a href="createItem.html">Try to add a new Swap Item (form)</a>
+						<form action="api/createSwapItem" method="POST">
+							<input type="submit" value="Create New Swap Item (default vals)" />
+						</form>
+					</li>
 					<li><a href="api/getSwapItems">Get Swap Items (raw REST)</a></li>
 					<li><a href="SwapItems.html">Get Swap Items (Angular)</a></li>
+					<li><a href="api/reset" onclick="return confirm('Are you sure you want to delete?');">Reset Database (DELETE EVERYTHING!!!!)</a></li>
 					<li><a href="demo.html">AngularJS First Demo</a></li>
-				</ul> 
+				</ul>
 			</td>
 			<td align="center"><img src="samurai-warrior.png"></td>
 		</tr>

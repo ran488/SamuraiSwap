@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="application.css" />
+<title>Samurai Swap! Create New Swap Item</title>
+</head>
+<body>
+	<table width="65%" bgcolor="white" border="0" align="center">
+		<tr>
+			<td><img alt="Logo" src="logo.png" border="0" /></td>
+		</tr>
+		<tr>
+			<td>Add a new item that you want to swap!! <br />
+				<form action="api/createSwapItem" method="POST">
+					Item Summary: <input type="text" size="50" name="summary" /> <br />
+					Detailed Description: <br />
+					<textarea rows="9" cols="80" name="description"></textarea>
+					<br /> Owner: <input type="text" size="25" name="owner" /> <br />
+					Location: <input type="text" size="25" name="location" /> <br />
+					<input type="submit" value="Create New Swap Item" />
+				</form>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<center>
+	<iframe src="SwapItems.html" frameborder="0" height="800" width="800" >
+		<p>
+			<a href="SwapItems.html">See results</a>
+		</p>
+	</iframe>
+	<br/>
+	<a href="/">HOME</a>
+	</center>
+</body>
+</html>

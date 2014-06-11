@@ -58,8 +58,8 @@ public class SwapItemDao implements GenericDao<SwapItem> {
 
 	@Override
 	public int delete(SwapItem oldItem) {
-		// TODO Auto-generated method stub
-		return 0;
+		WriteResult result = swapItems.remove(oldItem.toDbObject());
+		return result.getN();
 	}
 
 	@Override

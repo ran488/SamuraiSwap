@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.samuraiswap.dao.SwapItemDao;
 import com.samuraiswap.dto.SwapItem;
 
-/** An unholy mix of crap from the REST controller tutorials and my own code. TODO clean this up after I get it all working.
+/**
+ * An unholy mix of crap from the REST controller tutorials and my own code.
+ * TODO clean this up after I get it all working.
  * 
  * @author ranichol
- *
+ * 
  */
 @Controller
 public class SwapMatcherController {
@@ -51,21 +53,44 @@ public class SwapMatcherController {
 		return items.toString();
 	}
 
-	/** hard-coded for now just to prove it works, which it does.
+	/**
+	 * hard-coded for now just to prove it works, which it does.
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "createSwapItem", method = RequestMethod.POST)
 	public @ResponseBody
-	String createSwapItem() {
+	String createSwapItem(
+			@RequestParam(value = "description", required = false, defaultValue = "DEFAULT DESC") String description,
+			@RequestParam(value = "owner", required = false, defaultValue = "DEFAULT OWNER") String owner,
+			@RequestParam(value = "summary", required = false, defaultValue = "DEFAULT SUMMARY") String summary,
+			@RequestParam(value = "location", required = false, defaultValue = "DEFAULT LOCATION") String location) {
 		SwapItem item = new SwapItem();
-		item.setDescription("This is where it's at.");
-		item.setOwner("rick");
-		item.setSummary("Shiver Me Timbers");
-		item.setLocation("KS");
+		item.setDescription(description);
+		item.setOwner(owner);
+		item.setSummary(summary);
+		item.setLocation(location);
 		item.setPostedOn(new Date());
 		item.setExpiresAfter(new Date(System.currentTimeMillis() + 600000L));
 		dao.insert(item);
 		return item.toDbObject().toString();
 	}
+
+	/**
+	 * Reset the database - delete all the crap data and start over.
+	 * 
+	 * @return
+	 */
+	@RequestMapping("reset")
+	public @ResponseBody
+	String resetDB() {
+		StringBuffer buffer = new StringBuffer();
+		List<SwapItem> items = dao.findAll();
+		for (SwapItem item : items) {
+			int result = dao.delete(item);
+			buffer.append(result).append(" / ");
+		}
+		return buffer.toString();
+	}
+
 }

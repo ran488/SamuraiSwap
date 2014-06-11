@@ -10,20 +10,24 @@
 </head>
 <body ng-controller="swapAppController">
 
-<p>Search: <input ng-model="query"/>
-<p>Current Query: {{query}}
-
-	<ul>
-		<li ng-repeat="swapItem in swapItems | filter:query">
-		     Summary: {{swapItem.summary}}
-		<br/>Description: {{swapItem.description}}
-		<br/>Location: {{swapItem.location}}
-		<br/>Owner: {{swapItem.owner}}
-		</li>
-	</ul>
-	
-	{{swapItems.length}} items available. 
-	Raw Model: 
+	<p>
+		Search: <input ng-model="query" />
+	<p>Current Query: {{query}}
+	<table width="65%" bgcolor="white" border="0" align="center">
+		<tr>
+			<th>Summary</th>
+			<th>Description</th>
+			<th>Location</th>
+			<th>Owner</th>
+		</tr>
+		<tr ng-repeat="swapItem in swapItems | filter:query">
+			<td>{{swapItem.summary}}</td>
+			<td>{{swapItem.description}}</td>
+			<td>{{swapItem.location}}</td>
+			<td>{{swapItem.owner}}</td>
+		</tr>
+	</table>
+	{{swapItems.length}} items available. Raw Model:
 <pre>
 {{swapItems}}
 </pre>
