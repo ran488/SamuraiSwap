@@ -8,17 +8,6 @@ apply plugin: 'jetty'
 
 repositories {
 	mavenCentral()
-	// remove below before committing to GitHub PAYCHEX-specific crap....
-	maven { url 'http://repository.paychex.com:8081/artifactory/public' }
-	maven { url 'http://repository.paychex.com:8081/artifactory/external' }
-	maven { url 'http://repository.paychex.com:8081/artifactory/repo' }
-	ivy {
-		url 'http://repository.paychex.com:8081/artifactory/repo'
-		layout "pattern", {
-			artifact "[organisation]/[module]/[revision]/[type]/[artifact]-[revision](-[classifier]).[ext]"
-			ivy "[organisation]/[module]/[revision]/ivy-[revision](-[classifier]).xml"
-		}
-	}
 }
 
 war {
